@@ -1,0 +1,24 @@
+#login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+}
+
+#btCrearUsuario {
+    cursor: pointer;
+    &:hover {
+        color: #007bff;
+    }
+}

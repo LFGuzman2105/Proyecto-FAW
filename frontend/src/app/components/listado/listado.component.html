@@ -1,0 +1,60 @@
+<app-toolbar></app-toolbar>
+<div>
+    <br>
+    @if (tareas.length > 0) {
+        <div id="divLista">
+            <h2>LISTA DE TAREAS</h2>
+            <div id="divFiltrar">
+                <mat-form-field>
+                    <mat-label>BUSCAR</mat-label>
+                    <input matInput placeholder="" [(ngModel)]="buscar">
+                </mat-form-field>
+                <mat-form-field id="inputSelect">
+                    <mat-label>Prioridad</mat-label>
+                    <mat-select [(ngModel)]="prioridad">
+                        <mat-option value="">NINGUNO</mat-option>
+                        <mat-option value="ALTA">ALTA</mat-option>
+                        <mat-option value="MEDIA">MEDIA</mat-option>
+                        <mat-option value="BAJA">BAJA</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="filtrar()"><mat-icon>search</mat-icon>FILTRAR</button>
+                <button mat-raised-button color="primary" (click)="filtrarAZ()">FILTRAR A-Z</button>
+            </div>
+            <mat-accordion id="lista">
+            @for (tarea of tareas; track $index) {
+                @if (tarea.Estatus != "FINALIZADA") {
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="tarea">
+                        @if (tarea.Prioridad == "ALTA") {
+                            <mat-expansion-panel-header class="rojo">
+                                <mat-panel-title>{{tarea.Titulo}}</mat-panel-title>
+                                <mat-panel-description>{{tarea.Prioridad}}</mat-panel-description>
+                                <mat-panel-description>{{tarea.Estatus}}</mat-panel-description>
+                            </mat-expansion-panel-header>
+                        }
+                        @else if (tarea.Prioridad == "MEDIA") {
+                            <mat-expansion-panel-header class="amarillo">
+                                <mat-panel-title>{{tarea.Titulo}}</mat-panel-title>
+                                <mat-panel-description>{{tarea.Prioridad}}</mat-panel-description>
+                                <mat-panel-description>{{tarea.Estatus}}</mat-panel-description>
+                            </mat-expansion-panel-header>
+                        }
+                        @else {
+                            <mat-expansion-panel-header class="verde">
+                                <mat-panel-title>{{tarea.Titulo}}</mat-panel-title>
+                                <mat-panel-description>{{tarea.Prioridad}}</mat-panel-description>
+                                <mat-panel-description>{{tarea.Estatus}}</mat-panel-description>
+                            </mat-expansion-panel-header>
+                        }
+                        <div class="descripcion">
+                            <p>{{tarea.Descripcion}}</p>
+                            <p>La tarea fue asignada {{contarDias(tarea.Fecha_Creacion)}}, {{convertirFecha(tarea.Fecha_Creacion)}}.</p>
+                            <button mat-icon-button class="btCompletar" (click)="actualizarEstado(tarea.id)"><mat-icon>check</mat-icon></button>
+                        </div>
+                    </mat-expansion-panel>    
+                }
+            }
+            </mat-accordion>
+        </div>
+    }
+</div>

@@ -1,0 +1,66 @@
+<div id="formulario">
+    <button id="btRegresar" matSuffix mat-icon-button aria-label="arrow_back" routerLink="/login">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>FORMULARIO DE CREACIÓN DE USUARIOS</h2>
+    <mat-form-field class="input">
+        <mat-label>Ingrese correo</mat-label>
+        <input matInput placeholder="pat@example.com" [formControl]="email" (blur)="updateErrorMessage()" required>
+        @if (email.invalid) {
+            <mat-error>{{errorMessage}}</mat-error>
+        }
+
+        @if (email.value) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="limpiar()">
+                <mat-icon>close</mat-icon>
+            </button>
+        }
+    </mat-form-field>
+    <div id="divNombres">
+        <mat-form-field class="nombres">
+            <mat-label>Ingrese nombres</mat-label>
+            <input matInput placeholder="" [(ngModel)]="nombres" required>
+    
+            @if (nombres) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="nombres=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            }
+        </mat-form-field>
+        <mat-form-field class="nombres">
+            <mat-label>Ingrese apellidos</mat-label>
+            <input matInput placeholder="" [(ngModel)]="apellidos" required>
+    
+            @if (apellidos) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="apellidos=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            }
+        </mat-form-field>
+    </div>
+    <mat-form-field class="input">
+        <mat-label>Ingrese fecha de nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fecha_nacimiento" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+        <mat-label>Ingrese contraseña</mat-label>
+        <input #password maxlength="30" [(ngModel)]="contrasena" matInput [type]="hide ? 'password' : 'text'" required>
+        <mat-hint align="end">{{password.value.length}} / 30</mat-hint>
+        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-label id="labelGenero">Seleccione género*</mat-label>
+    <mat-radio-group aria-label="" [(ngModel)]="genero" required id="genero">
+        <mat-radio-button color="primary" value="Masculino">Masculino</mat-radio-button>
+        <mat-radio-button color="accent" value="Femenino">Femenino</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <button mat-raised-button color="primary" (click)="registrar()">CREAR USUARIO</button>
+    <br>
+</div>

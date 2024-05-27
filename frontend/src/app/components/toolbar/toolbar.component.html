@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+    <mat-icon>person</mat-icon>
+    <span class="spacer">Bienvenido {{nombre}}</span>
+    <button mat-raised-button (click)="logout()"><mat-icon>exit_to_app</mat-icon>CERRAR SESIÓN</button>
+    <button mat-raised-button (click)="navegarListado()"><mat-icon>list</mat-icon>LISTADO</button>
+    <button mat-raised-button (click)="navegarAgregarTarea()"><mat-icon>add</mat-icon>AGREGAR TAREAS</button>
+</mat-toolbar>

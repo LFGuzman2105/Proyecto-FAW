@@ -1,0 +1,27 @@
+<div id="login">
+    <h2>LOGIN</h2>
+    <mat-form-field class="input">
+        <mat-label>Ingrese correo</mat-label>
+        <input matInput placeholder="pat@example.com" [formControl]="email" (blur)="updateErrorMessage()" required>
+        @if (email.invalid) {
+            <mat-error>{{errorMessage}}</mat-error>
+        }
+
+        @if (email.value) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="limpiar()">
+                <mat-icon>close</mat-icon>
+            </button>
+        }
+    </mat-form-field>
+    <mat-form-field class="input">
+        <mat-label>Ingrese contraseña</mat-label>
+        <input [(ngModel)]="contrasena" matInput [type]="hide ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="login()">INGRESAR</button>
+    <br>
+    <button mat-button id="btCrearUsuario" routerLink="/registroUsuario"><mat-icon>person_add</mat-icon>Crear Usuario</button>
+</div>
