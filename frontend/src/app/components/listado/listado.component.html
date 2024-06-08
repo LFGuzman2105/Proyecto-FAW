@@ -1,13 +1,20 @@
 <app-toolbar></app-toolbar>
 <div>
     <br>
-    @if (tareas.length > 0) {
+    <!-- @if (tareas.length >= 0) { -->
+    @if (verificacion == true) {
         <div id="divLista">
             <h2>LISTA DE TAREAS</h2>
             <div id="divFiltrar">
                 <mat-form-field>
                     <mat-label>BUSCAR</mat-label>
                     <input matInput placeholder="" [(ngModel)]="buscar">
+
+                    @if (buscar) {
+                        <button matSuffix mat-icon-button aria-label="Clear" (click)="buscar=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    }
                 </mat-form-field>
                 <mat-form-field id="inputSelect">
                     <mat-label>Prioridad</mat-label>

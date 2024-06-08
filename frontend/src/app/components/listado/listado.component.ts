@@ -30,6 +30,7 @@ export class ListadoComponent {
   buscar: string;
   prioridad: string;
   filtroAZ: string;
+  verificacion: boolean;
 
   constructor(private tareaService: TareaService, private router: Router, 
               private verificacionService: VerificacionService, public dialog: MatDialog) {
@@ -39,9 +40,11 @@ export class ListadoComponent {
     this.buscar = "";
     this.prioridad = "";
     this.filtroAZ = "ASC";
+    this.verificacion = false;
     
     try {
       if (this.id + "" == this.verificacionService.getId()){
+        this.verificacion = true;
         this.mostrarTareas();
       }
       else {
@@ -76,6 +79,9 @@ export class ListadoComponent {
     this.tareaService.filtrarTareas(this.id, this.buscar, this.prioridad, filtroAZ).subscribe((response) => {
       if (response.status == 1) {
         this.tareas = response.data;
+      }
+      else if (response.status == 0) {
+        this.tareas = [];
       }
     });
   }
